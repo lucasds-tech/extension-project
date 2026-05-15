@@ -3,6 +3,8 @@ package com.safeentry.backend.controller;
 import com.safeentry.backend.exception.ResourceNotFoundException;
 import com.safeentry.backend.model.Residents;
 import com.safeentry.backend.repository.ResidentsRepository;
+import com.safeentry.backend.service.ResidentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +21,17 @@ public class ResidentsController {
     @Autowired
     private ResidentsRepository residentsRepository;
 
+    @Autowired
+    private ResidentService residentService;
+
     @PostMapping("/residents")
-    public Residents createResident(@RequestBody Residents resident) {
-        return residentsRepository.save(resident);
+    public ResponseEntity<?> createResident(@Valid @RequestBody Residents resident) {
+        try {
+            Residents nuevoResident = residentService.salvar(resident);
+            return ResponseEntity.ok(nuevoResident);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/residents")
@@ -30,21 +40,29 @@ public class ResidentsController {
     }
 
     @GetMapping("/residents/{id}")
-    public Residents getResidentById(@PathVariable Long id) {
-        return residentsRepository.findById(id).orElse(null);
+    public ResponseEntity<Residents> getResidentById(@PathVariable Long id) {
+        Residents resident = residentsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Resident not exist with id :" + id));
+        return ResponseEntity.ok(resident);
     }
 
     @PutMapping("/residents/{id}")
-    public ResponseEntity<Residents> updateResidents(@PathVariable Long id, @RequestBody Residents residentsInfo){
-        Residents residents = residentsRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Residents not exist with id :" + id));
+    public ResponseEntity<?> updateResidents(@PathVariable Long id, @Valid @RequestBody Residents residentsInfo){
+        try {
+            Residents residents = residentsRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Residents not exist with id :" + id));
 
-        residents.setName(residents.getName());
-        residents.setLastName(residents.getLastName());
-        residents.setDocument(residents.getDocument());
+            residents.setName(residentsInfo.getName());
+            residents.setLastName(residentsInfo.getLastName());
+            residents.setDocument(residentsInfo.getDocument());
 
-        Residents updatedResidents = residentsRepository.save(residents);
-        return ResponseEntity.ok(updatedResidents);
+            Residents updatedResidents = residentService.salvar(residents);
+            return ResponseEntity.ok(updatedResidents);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/residents/{id}")
