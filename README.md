@@ -1,7 +1,8 @@
 <h1 align="center"> Projeto de Extensão em Programação - {a definir}</h1>
 
 <p>Este repositório contém o desenvolvimento de um {a definir} voltado para fins educacionais, como parte do curso de Análise e Desenvolvimento de Sistemas - matéria PROJETO DE EXTENSAO EM PROGRAMACAO (UNINOVE | Turma 60 | aula de Sexta-feira) — Adriano Michelotti Schroeder</p>
-<p>Link dos Materiais: https:// </p>
+
+<p>Arquivos de suporte incluídos na pasta './docs'.</p>
 <p>Entrega Final: 31/05/2026 ⚠</p>
 <h2>📌 Objetivo</h2>
 
