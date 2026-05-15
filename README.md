@@ -1,42 +1,85 @@
-<h1 align="center"> Projeto de Extensão em Programação - {a definir}</h1>
+<h1 align="center"> SafeEntry - Sistema de Portaria Residencial</h1>
+<p>Sistema desenvolvido para controle de acesso, cadastro de moradores e gerenciamento de visitantes em condomínios residenciais.</p>
 
-<p>Este repositório contém o desenvolvimento de um {a definir} voltado para fins educacionais, como parte do curso de Análise e Desenvolvimento de Sistemas - matéria PROJETO DE EXTENSAO EM PROGRAMACAO (UNINOVE | Turma 60 | aula de Sexta-feira) — Adriano Michelotti Schroeder</p>
+---
+## 📖 Sobre o Projeto
 
-<p>Arquivos de suporte incluídos na pasta './docs'.</p>
-<p>Entrega Final: 31/05/2026 ⚠</p>
-<h2>📌 Objetivo</h2>
+O <strong>SafeEntry (Entrada Segura)</strong> é um sistema de portaria residencial desenvolvido para fins educacionais como parte da disciplina <strong>Projeto de Extensão em Programação</strong>, do curso de <strong>Análise e Desenvolvimento de Sistemas</strong> da <strong>UNINOVE</strong>.
 
-O projeto tem como objetivo desenvolver um ChatBot funcional capaz de responder perguntas.
+📚 Turma 60 — Sexta-feira  
+👨‍🏫 Professor: Adriano Michelotti Schroeder  
+📅 Entrega Final: 31/05/2026
 
-<h2>🛠️ Tecnologias Utilizadas</h2>
+O projeto tem como objetivo aplicar conceitos de:
+- desenvolvimento back-end;
+- integração entre front-end e API;
+- autenticação de usuários;
+- operações CRUD;
+- banco de dados relacional;
+- versionamento com Git/GitHub;
+- práticas básicas de DevOps.
 
-    - (backend)
+---
+## 🎯 Objetivo
 
-    - (frontent)
+Desenvolver uma aplicação web funcional para controle de portaria residencial, permitindo o gerenciamento de moradores, visitantes e acessos por meio de uma interface integrada ao back-end em Java.
 
-    Git/GitHub (versionamento e colaboração)
+---
+## 🛠️ Tecnologias Utilizadas
 
-<h2>🧠 Funcionalidades Previstas</h2>
+### Back-end
+- Java
+- Spring Boot
+- Spring Data JPA
+- Maven
 
-- especificar
+### Front-end
+- HTML
+- CSS
+- JavaScript
+- React
 
+### Banco de Dados
+- PostgreSQL
 
-## 🚀 Como rodar o projeto localmente
+### Ferramentas
+- GitHub
+- Postman
 
-### **Pré-requisitos:**
-- 
+---
+## 🧠 Funcionalidades Previstas
 
-### **1. Clone o repositório:**
+- ✅ Login e autenticação de usuários
+- ✅ Cadastro de moradores
+- ✅ Listagem de moradores
+- ✅ Edição de moradores
+- ✅ Exclusão de moradores
+- ✅ Cadastro de visitantes
+- ✅ Controle de entrada e saída
+- ✅ Integração com banco de dados
+- ✅ Interface web para gerenciamento
+- ✅ API REST com Spring Boot
+
+---
+## 📂 Estrutura do Projeto
+
 ```bash
-git clone https://github.com/lucasds-tech/--.git
-cd --
+safeentry/
+│
+├── backend/        # API Java Spring Boot
+├── frontend/       # Interface web
+├── docs/           # Documentações e arquivos de apoio
+└── README.md
 ```
 
-### **2. Instale as dependências:**
-```bash
+---
+## 📌 Status do Projeto
 
-```
+🚧 Em desenvolvimento
 
-### **3. Execute o banco de dados e aplicação. Logo em seguida, teste em sua IDE de preferência :)**
+---
+## 👨‍💻 Autor
+
+Desenvolvido por Lucas da Silva para fins acadêmicos.
 ```bash
 
