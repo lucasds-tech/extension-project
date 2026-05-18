@@ -24,7 +24,7 @@ public class Residents {
     @Column(name = "lastName")
     private String lastName;
 
-    @NotBlank(message = "O documento é obrigatório.")
+    @NotBlank(message = "The document is required.")
     @Pattern(regexp = "\\d+", message = "The document must contain only numbers.")
     @Column(name = "document")
     private String document;
