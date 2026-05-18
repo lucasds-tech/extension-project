@@ -26,11 +26,11 @@ public class Residents {
 
     @NotBlank(message = "The document is required.")
     @Pattern(regexp = "\\d+", message = "The document must contain only numbers.")
-    @Column(name = "document")
+    @Column(name = "document", unique = true, nullable = false)
     private String document;
 
     @NotBlank(message = "The residence is required.")
-    @Column(name = "residence")
+    @Column(name = "residence", nullable = false)
     private String residence;
 
 }
