@@ -1,3 +1,5 @@
+"use client"
+
 import { use } from "react"
 import useSWR from "swr"
 import { Resident } from "@/lib/types"

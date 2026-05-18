@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { ArrowLeft, UserCheck } from "lucide-react"
@@ -83,6 +85,7 @@ export default function VisitorsPage() {
           <ArrowLeft className="h-4 w-4" />
           Voltar
         </Link>
+
       </div>
 
       <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
@@ -149,13 +152,17 @@ export default function VisitorsPage() {
                 <div className="text-sm font-medium text-primary">
                   Residência: {v.residence}
                 </div>
+
               </div>
+
             ))
 
           )}
 
         </div>
+
       </div>
+
     </div>
   )
 }
