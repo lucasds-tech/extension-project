@@ -26,6 +26,7 @@ export function ResidentForm({ initialData, mode }: ResidentFormProps) {
     residence: initialData?.residence || "",
   })
   const [errors, setErrors] = useState<Partial<ResidentFormData>>({})
+  const [apiError, setApiError] = useState("")
 
   const validate = (): boolean => {
     const newErrors: Partial<ResidentFormData> = {}
@@ -53,24 +54,35 @@ export function ResidentForm({ initialData, mode }: ResidentFormProps) {
     if (!validate()) return
 
     setIsSubmitting(true)
+    setApiError("")
+
     try {
-      if (mode === "create") {
-        await fetch("http://localhost:8080/api/v1/residents", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        })
-      } else if (initialData?.id) {
-        await fetch(`http://localhost:8080/api/v1/residents/${initialData.id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        })
+      const API_URL =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1"
+
+      const response =
+        mode === "create"
+          ? await fetch(`${API_URL}/residents`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            })
+          : await fetch(`${API_URL}/residents/${initialData?.id}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            })
+
+      if (!response.ok) {
+        const errorMessage = await response.text()
+        throw new Error(errorMessage || "Erro ao salvar morador.")
       }
-      mutate("http://localhost:8080/api/v1/residents")
+
+      mutate(`${API_URL}/residents`)
       router.push("/")
-    } catch (error) {
-      console.error("Error saving resident:", error)
+
+    } catch (error: any) {
+      setApiError(error.message || "Erro inesperado.")
     } finally {
       setIsSubmitting(false)
     }
@@ -109,7 +121,13 @@ export function ResidentForm({ initialData, mode }: ResidentFormProps) {
         </div>
       </CardHeader>
       <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        {apiError && (
+              <div className="mb-4 rounded-md border border-red-500 bg-red-100 p-3 text-sm text-red-700">
+                {apiError}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="name" className="text-foreground">
               Nome
@@ -148,7 +166,7 @@ export function ResidentForm({ initialData, mode }: ResidentFormProps) {
             </Label>
             <Input
               id="document"
-              placeholder=""
+              placeholder="000.000.000-00"
               value={formData.document}
               onChange={handleChange("document")}
               className={`bg-input border-border text-foreground placeholder:text-muted-foreground ${

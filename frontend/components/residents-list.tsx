@@ -34,16 +34,29 @@ import {
 import { Spinner } from "@/components/ui/spinner"
 import { Plus, Search, MoreHorizontal, Eye, Pencil, Trash2, Users } from "lucide-react"
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1"
+
+const fetcher = async (url: string) => {
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error("Erro ao carregar moradores.")
+  }
+
+  return response.json()
+}
 
 export function ResidentsList() {
   const router = useRouter()
-  const { data: residents, error, isLoading } = useSWR<Resident[]>("http://localhost:8080/api/v1/residents", fetcher)
+  const { data: residents, error, isLoading } = useSWR<Resident[]>(`${API_URL}/residents`, fetcher)
   const [searchTerm, setSearchTerm] = useState("")
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const filteredResidents = residents?.filter(
+  const safeResidents = Array.isArray(residents) ? residents : []
+
+  const filteredResidents = safeResidents.filter(
     (resident) =>
       resident.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       resident.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -56,8 +69,8 @@ export function ResidentsList() {
 
     setIsDeleting(true)
     try {
-      await fetch(`http://localhost:8080/api/v1/residents/${deleteId}`, { method: "DELETE" })
-      mutate("http://localhost:8080/api/v1/residents")
+      await fetch(`${API_URL}/residents/${deleteId}`, { method: "DELETE" })
+      mutate(`${API_URL}/residents`)
     } catch (error) {
       console.error("Error deleting resident:", error)
     } finally {
@@ -78,7 +91,7 @@ export function ResidentsList() {
     return (
       <Card className="border-destructive/50 bg-destructive/10">
         <CardContent className="p-6">
-          <p className="text-center text-destructive">Erro ao carregar moradores.</p>
+          <p className="text-center text-destructive">{error.message || "Erro ao carregar moradores."}</p>
         </CardContent>
       </Card>
     )
