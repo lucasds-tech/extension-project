@@ -20,64 +20,108 @@ O projeto tem como objetivo aplicar conceitos de:
 - práticas básicas de DevOps.
 
 ---
-## 🎯 Objetivo
+# 🎯 Objetivo
 
-Desenvolver uma aplicação web funcional para controle de portaria residencial, permitindo o gerenciamento de moradores, visitantes e acessos por meio de uma interface integrada ao back-end em Java.
+Desenvolver uma aplicação web funcional para controle de portaria residencial, permitindo o gerenciamento de:
+
+- moradores;
+- visitantes;
+- autenticação de usuários;
+- controle de acesso;
+- integração completa com banco de dados PostgreSQL.
 
 ---
-## 🛠️ Tecnologias Utilizadas
 
-### Back-end
+# 🛠️ Tecnologias Utilizadas
+
+## 🔙 Back-end
+
 - Java
 - Spring Boot
+- Spring Security
+- JWT Authentication
 - Spring Data JPA
 - Maven
 
-### Front-end
-- HTML
-- CSS
-- JavaScript
-- React
+## 🎨 Front-end
 
-### Banco de Dados
+- Next.js
+- React
+- TypeScript
+- TailwindCSS
+- Shadcn/UI
+
+## 🗄️ Banco de Dados
+
 - PostgreSQL
 
-### Ferramentas
+## 🔧 Ferramentas
+
+- Git
 - GitHub
 - Postman
+- IntelliJ IDEA
+- VSCode
 
 ---
-## 🧠 Funcionalidades Previstas
 
-- ✅ Login e autenticação de usuários
+# 🧠 Funcionalidades
+
+## 🔐 Autenticação
+
+- ✅ Login com JWT
+- ✅ Rotas protegidas
+- ✅ Persistência de autenticação
+
+## 👥 Moradores
+
 - ✅ Cadastro de moradores
 - ✅ Listagem de moradores
 - ✅ Edição de moradores
 - ✅ Exclusão de moradores
+- ✅ Validação de CPF/RG
+
+## 🚶 Visitantes
+
 - ✅ Cadastro de visitantes
-- ✅ Controle de entrada e saída
-- ✅ Integração com banco de dados
-- ✅ Interface web para gerenciamento
-- ✅ API REST com Spring Boot
+- ✅ Listagem de visitantes
+- ✅ Controle de acesso
+- ✅ Validação de campos obrigatórios
+- ✅ Validação de CPF/RG
+
+  
+## ⚙️ Sistema
+
+- ✅ Integração completa Front-end + Back-end
+- ✅ API REST Spring Boot
+- ✅ Integração com PostgreSQL
+- ✅ Tratamento visual de erros
+- ✅ Validações de formulário
+- ✅ Responsividade básica
 
 ---
-## 📂 Estrutura do Projeto
+
+# 📂 Estrutura do Projeto
 
 ```bash
 safeentry/
 │
 ├── backend/        # API Java Spring Boot
-├── frontend/       # Interface web
-├── docs/           # Documentações e arquivos de apoio
+├── frontend/       # Interface web Next.js
+├── docs/           # Documentações e arquivos auxiliares
 └── README.md
 ```
 
----
 ## 📌 Status do Projeto
 
-🚧 Em desenvolvimento
+✅ Projeto funcional e em evolução.
 
----
+🚧 Melhorias futuras:
+- controle de entrada e saída em tempo real;
+- níveis de permissão;
+- deploy em ambiente;
+- testes automatizados.
+
 ## 👨‍💻 Autor
 
 Desenvolvido por Lucas da Silva para fins acadêmicos.
